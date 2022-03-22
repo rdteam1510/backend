@@ -8,7 +8,7 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = "https://developers.google.com/oauthplayground";
 const REFRESH_TOKEN =
-	"1//04epVcNQBullfCgYIARAAGAQSNwF-L9IrO4wyxcvtY7oc4c0n2T336s3dyi75K-mFJk89F-rzLDDHRfdgQgI55LKehq6fJyoVfp8";
+	"";
 
 const oAuth2Client = new google.auth.OAuth2(
 	CLIENT_ID,
@@ -38,8 +38,8 @@ async function sendMail() {
 		});
 
 		const mailOptions = {
-			from: "Trading Vision <rdteam1510@gmail.com>",
-			to: "adanguyen259@gmail.com",
+			from: "",
+			to: "",
 			subject: "HAHAHA",
 			text: "Hello world! =))))))))))))))",
 		};
