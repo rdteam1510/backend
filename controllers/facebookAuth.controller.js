@@ -19,7 +19,7 @@ exports.failedLogin = (req, res) => {
 exports.logout = (req, res) => {
 	req.logout();
 	req.session.destroy();
-	res.redirect(CLIENT_URL + "login");
+	res.redirect(CLIENT_URL + "login");z
 };
 
 exports.facebookAuth = passport.authenticate("facebook", {
@@ -28,5 +28,5 @@ exports.facebookAuth = passport.authenticate("facebook", {
 
 exports.facebookAuthCallback = passport.authenticate("facebook", {
 	successRedirect: CLIENT_URL,
-	failureRedirect: "/auth/login",
+	failureRedirect: CLIENT_URL + 'login',
 });

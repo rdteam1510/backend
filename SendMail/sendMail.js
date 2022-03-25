@@ -1,14 +1,12 @@
-const nodemailer = require("nodemailer");
+require("dotenv").config({ path: "../config/.env" });
 const { google } = require("googleapis");
-const scheduler = require("node-schedule");
-require("dotenv").config({ path: "./config/.env" });
+const nodemailer = require("nodemailer");
 
-// These id's and secrets should come from .env file.
+/* ====================================================== */
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = "https://developers.google.com/oauthplayground";
-const REFRESH_TOKEN =
-	"";
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
 const oAuth2Client = new google.auth.OAuth2(
 	CLIENT_ID,
@@ -17,7 +15,7 @@ const oAuth2Client = new google.auth.OAuth2(
 );
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-async function sendMail() {
+async function sendMail(email, title, content) {
 	try {
 		const accessToken = await oAuth2Client.getAccessToken();
 
@@ -38,10 +36,10 @@ async function sendMail() {
 		});
 
 		const mailOptions = {
-			from: "",
-			to: "",
-			subject: "HAHAHA",
-			text: "Hello world! =))))))))))))))",
+			from: "Trading Vision <rdteam1510@gmail.com>",
+			to: email,
+			subject: title,
+			text: content,
 		};
 
 		const result = await transport.sendMail(mailOptions);
@@ -51,10 +49,4 @@ async function sendMail() {
 	}
 }
 
-const mTime = Date.now() + 60000;
-const mJob = scheduler.scheduleJob(mTime, () => {
-	sendMail()
-		.then((result) => console.log("Email sent...", result))
-		.catch((error) => console.log(error.message));
-	mJob.cancel();
-});
+module.exports = sendMail;

@@ -18,7 +18,6 @@ exports.getAllCompanyInfo = async (req, res) => {
 		queryObject.Industry = industry;
 	}
 
-	console.log(queryObject);
 	let result = CompanyInfo.find(queryObject);
 	const companyinfo = await result;
 	if (!companyinfo) {
@@ -37,25 +36,18 @@ exports.getCompanyInfoByTicker = async (req, res) => {
 	res.status(200).json({ success: true, companyinfo });
 };
 
-exports.getRelevant = (req, res) => {
+exports.getRelevant = async (req, res) => {
 	CompanyInfo.aggregate([
-		{ $match: { Ticker: "ACB" } },
 		{
 			$lookup: {
 				from: "stocks",
-				// localField: "Ticker",
-				// foreignField: "Ticker",
+				localField: "Ticker",
+				foreignField: "Ticker",
 				as: "Ticker",
-				let: { ticker: "$Ticker" },
-				pipeline: [
-					{ $match: { $expr: { $eq: ["$$ticker", "$Ticker"] } } },
-					{ $sort: { TimeStamp: -1 } },
-					{ $limit: 5 },
-				],
 			},
 		},
 	]).exec((err, result) => {
 		if (err) throw err;
-		res.json(result);
+		res.send(result[0].Ticker);
 	});
 };

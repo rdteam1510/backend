@@ -11,7 +11,7 @@ const {
 // @method GET
 // @route /api/companyinfo
 router.route("/").get(getAllCompanyInfo);
-router.route("/relevant").get(getRelevant);
+// router.route("/relevant").get(getRelevant);
 
 // @desc Get company info by ticker
 // @method GET

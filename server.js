@@ -87,6 +87,13 @@ app.use("/api/favorite", ensureAuth, favoriteRoutes);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
+const schedule = require("node-schedule");
+const mainReminder = require("./SendMail/reminder");
+const mJob = schedule.scheduleJob("*/1 * * * *", () => {
+	mainReminder();
+	mJob.cancel(true);
+});
+
 /* ====================================================== */
 // Server is listening
 const start = async () => {

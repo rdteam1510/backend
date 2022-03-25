@@ -1,4 +1,4 @@
-require(".dotenv").config({ path: "./config/.env" });
+require("dotenv").config({ path: "./config/.env" });
 
 const connectDB = require("./config/db");
 
@@ -8,7 +8,7 @@ const connectDB = require("./config/db");
 const Stocks = require("./models/Stock");
 
 //* Import JSON file
-const jsonStocks = require("./stocks.json");
+const jsonStocks = require("./DATA/stocks.json");
 
 const start = async () => {
 	try {

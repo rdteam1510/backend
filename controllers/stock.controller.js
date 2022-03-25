@@ -2,8 +2,13 @@ const Stock = require("../models/Stock.js");
 const NotFoundError = require("../errors");
 
 exports.getAllStocks = async (req, res) => {
-	const stocks = await Stock.find({});
-	res.status(200).json({ stocks });
+
+	try {
+		const stocks = await Stock.find({}).limit(300);
+		res.status(200).json({ stocks });
+	} catch (error) {
+		console.log(error)
+	}
 };
 
 exports.getAllStocksQuery = async (req, res) => {
