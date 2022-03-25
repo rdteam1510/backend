@@ -1,8 +1,5 @@
-// require("dotenv").config({ path: "../config/.env" });
 const Reminder = require("../models/Reminder");
 const moment = require("moment");
-// const connectDB = require("../config/db");
-// connectDB();
 
 const startOfDay = moment(new Date().setUTCHours(0, 0, 0, 0)).utc().valueOf();
 const endOfDay = moment(new Date().setUTCHours(23, 59, 59, 999))

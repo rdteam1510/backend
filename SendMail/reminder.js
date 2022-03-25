@@ -1,4 +1,3 @@
-// require("dotenv").config("../config/.env");
 const schedule = require("node-schedule");
 const sendMail = require("./sendMail");
 const { queryInfo, isSend } = require("./queryInfo");

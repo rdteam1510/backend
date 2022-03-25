@@ -6,7 +6,8 @@
   - [Stocks](#stocks)
   - [Predictions](#predictions)
   - [Reminders](#reminders)
-  - [Google oAuth2.0](#google-oauth20)
+  - [Google oAuth2.0 and Facebook oAuth](#google-oauth20-and-facebook-oauth)
+  - [Reminder mail](#reminder-mail)
 
 ---
 
@@ -67,7 +68,7 @@
     -   Delete reminder
     -   Update reminder
 
-## Google oAuth2.0
+## Google oAuth2.0 and Facebook oAuth
 
 -   http://localhost:4040/auth/login => request to login with google http://localhost:4040/auth/google. It has 2 outcomes:
 
@@ -78,3 +79,15 @@
     2.http://localhost:4040/auth/failure => login failed
 
 -   http://localhost:4040/auth/logout => logout account on the application. The session will be destroyed and removed from the DB.
+
+!**NOTE**: Facebook oAuth is processed the same way as Google oAuth2.0
+
+## Reminder mail
+
+All relevant files are stored in SendMail folder:
+
+1. _**queryInfo**_: all reminders on that current day will be processed and _IsSend_ is for check whether that reminder has been sent or not
+2. _**sendMail**_: all necessary configurations to send email using _Nodemailer_
+3. _**reminder**_: main file for sending reminders
+
+Send Reminder is scheduled to check for every minute in _server_
